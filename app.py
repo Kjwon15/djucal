@@ -2,9 +2,19 @@ import datetime
 import re
 
 import fake_useragent
+import flask
 import icalendar
 import lxml.html
 import requests
+
+
+app = flask.Flask(__name__)
+
+
+@app.route('/djucal.ical')
+def djucal():
+    cal = make_ical()
+    return cal.to_ical().decode('utf-8')
 
 
 def extract_schedule(year, schedule):
@@ -49,15 +59,9 @@ def make_ical():
         for month in tree.xpath('//*[@class="sch-box"]'):
             year_month = month.find('*/*[@class="year"]').text_content()
             year = int(year_month.split('/')[0])
-            for schedule in month.find('*/*[@class="schList-box"]/ul/li'):
+            for schedule in month.findall('*[@class="schList-box"]/ul/li'):
                 t = schedule.text_content()
                 event = extract_schedule(year, t)
                 cal.add_component(event)
 
-    print(cal.to_ical().decode('utf-8'))
-    with open('djucal.ical', 'wb') as fp:
-        fp.write(cal.to_ical())
-
-
-if __name__ == '__main__':
-    make_ical()
+    return cal

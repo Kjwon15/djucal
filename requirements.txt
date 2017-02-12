@@ -1,0 +1,6 @@
+Flask>=0.12
+fake-useragent>=0.1.4
+icalendar>=3.11.2
+lxml>=3.7.2
+requests>=2.13.0
+uWSGI==2.0.14
