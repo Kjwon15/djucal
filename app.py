@@ -21,7 +21,7 @@ def extract_schedule(year, schedule):
     pattern = re.compile(
         r'(?P<from>\d{1,2}/\d{1,2})'
         r'(?: ~(?P<to>\d{1,2}/\d{1,2}))?'
-        r' (?:\d{4}학년도 )?(?P<content>.*)')
+        r'\s*(?:\d{4}학년도\s+)?(?P<content>.*)')
 
     event = icalendar.Event()
     matched = pattern.match(schedule)
