@@ -1,0 +1,10 @@
+{
+  "name": "DJU cal",
+  "description": "Export DJU calendar as ical format.",
+  "keywords": [
+    "flask",
+    "ical"
+  ],
+  "addons": [],
+  "env": {}
+}
