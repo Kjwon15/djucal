@@ -7,6 +7,8 @@ import icalendar
 import lxml.html
 import requests
 
+from .utils import cache
+
 
 app = flask.Flask(__name__)
 
@@ -39,6 +41,7 @@ def extract_schedule(year, schedule):
     return event
 
 
+@cache(60 * 60)  # An hour
 def make_ical():
     ua = fake_useragent.UserAgent()
     session = requests.session()
