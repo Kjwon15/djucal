@@ -16,7 +16,11 @@ app = flask.Flask(__name__)
 @app.route('/djucal.ical')
 def djucal():
     cal = make_ical()
-    return cal.to_ical().decode('utf-8')
+    response = flask.Response(
+        cal.to_ical().decode('utf-8'),
+        mimetype='text/calendar')
+
+    return response
 
 
 def extract_schedule(year, schedule):
